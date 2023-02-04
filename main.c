@@ -19,7 +19,7 @@ int main() {
 			}
 			printf("Liegt der Stuhl auf dem Weg?\n");
 			printf("y/n: ");
-			scanf_s("%s", stuhl);
+			scanf("%s", stuhl);
 
 			stuhl[0] = tolower(stuhl[0]);
 			if (stuhl[0] == 'y' || stuhl[0] == 'n') {
@@ -30,66 +30,38 @@ int main() {
 			}
 		} while (trashInput);
 
-		if (stuhl[0] == 'n') {
-			do {
-				if (trashInput) {
-					printf("UNZUL%cSSIGER INPUT!!!\n", AE);
-				}
-				printf("Wie viele Schritte bis zur Wand?\n");
-				printf("Eingabe: ");
-				scanf_s("%d", &schritteInput);
-				// TODO:
-				// Bug fixen
-				if (schritteInput < 0) {
-					trashInput = false;
+		if (trashInput) {
+			printf("UNZUL%cSSIGER INPUT!!!\n", AE);
+		}
 
-					schritteGesamt += schritteInput;
-
-					int i;
-					i = 1 + schritteGesamt - schritteInput;
-					while (i <= schritteGesamt) {
-						printf("%d. Schritt\n", i);
-						i++;
-					}
-					printf("Wand erreicht\n");
-					umdrehungen++;
-					printf("%d. Linksdrehung\n", umdrehungen);
-				}
-				else {
-					trashInput = true;
-				}
-			} while (trashInput);
+		if (stuhl[0] == 'y') {
+			printf("Wie viele Schritte bis zum Stuhl?\n");
 		}
 		else {
-			do {
-				do {
-					if (trashInput) {
-						printf("UNZUL%cSSIGER INPUT!!!\n", AE);
-					}
-					printf("Ist der Stuhl da?\n");
-					printf("y/n: ");
-					scanf_s("%s", stuhl);
+			printf("Wie viele Schritte bis zur Wand?\n");
+		}
+		printf("Eingabe: ");
+		scanf_s("%d", &schritteInput);
+		schritteGesamt += schritteInput;
 
-					stuhl[0] = tolower(stuhl[0]);
-					if (stuhl[0] == 'y' || stuhl[0] == 'n') {
-						trashInput = false;
-					}
-					else {
-						trashInput = true;
-					}
-				} while (trashInput);
-
-				if (stuhl[0] == 'n') {
-					schritteGesamt++;
-					printf("%d. Schritt\n", schritteGesamt);
-				}
-			} while (stuhl[0] != 'y');
+		int i;
+		i = 1 + schritteGesamt - schritteInput;
+		while (i <= schritteGesamt) {
+			printf("%d. Schritt\n", i);
+			i++;
+		}
+		if (stuhl[0] == 'y') {
 			break;
 		}
+		umdrehungen++;
+		printf("Wand erreicht\n");
+		printf("%d. Linksdrehung\n", umdrehungen);
 	}
 
+	printf("\n");
 	printf("STUHL ERREICHT \\(^.^)/\n");
 	printf("Anzahl Umdrehungen: %d\n", umdrehungen);
 	printf("Anzahl Schritte: %d\n", schritteGesamt);
+
 	return 0;
 }
