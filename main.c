@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define AE (char)142
 
@@ -8,12 +9,11 @@ int main() {
 	int schritteGesamt = 0;
 	int umdrehungen = 0;
 	bool stuhlErreicht = false;
-	bool trashInput = false;
-
 	char stuhl[2];
-	int schritteInput;
-
+	char schritteInput[10];
+	int schritteInDurchgang;
 	while (!stuhlErreicht) {
+		bool trashInput = false;
 		do {
 			if (trashInput) {
 				printf("UNZUL%cSSIGER INPUT!!!\n", AE);
@@ -31,21 +31,39 @@ int main() {
 			}
 		} while (trashInput);
 
-		if (stuhl[0] == 'y') {
-			printf("\nWie viele Schritte bis zum Stuhl?\n");
-		}
-		else {
-			printf("\nWie viele Schritte bis zur Wand?\n");
-		}
-		printf("Eingabe: ");
-		scanf_s("%d", &schritteInput);
-		schritteGesamt += schritteInput;
+		do {
+			if (trashInput) {
+				printf("UNZUL%cSSIGER INPUT!!!\n", AE);
+				printf("Bitte gib eine positive Ganzzahl an!\n");
+			}
 
-		int i;
-		i = 1 + schritteGesamt - schritteInput;
-		while (i <= schritteGesamt) {
-			printf("%d. Schritt\n", i);
-			i++;
+			if (stuhl[0] == 'y') {
+				printf("\nWie viele Schritte bis zum Stuhl?\n");
+			}
+			else {
+				printf("\nWie viele Schritte bis zur Wand?\n");
+			}
+			printf("Eingabe: ");
+			scanf("%s", schritteInput);
+			trashInput = false;
+			for (int i = 0; i < sizeof(schritteInput); ++i) {
+				if (!isdigit(schritteInput[i])) {
+					if (!(schritteInput[i] == '\0' && i > 0)) {
+						trashInput = true;
+					}
+					break;
+				}
+			}
+		} while (trashInput);
+		//atoi = ASCII to integer
+		schritteInDurchgang = atoi(schritteInput);
+
+		schritteGesamt += schritteInDurchgang;
+
+		int j = 1 + schritteGesamt - schritteInDurchgang;
+		while (j <= schritteGesamt) {
+			printf("%d. Schritt\n", j);
+			j++;
 		}
 
 		if (stuhl[0] == 'y') {
