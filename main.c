@@ -11,8 +11,9 @@ int main() {
 	bool stuhlErreicht = false;
 	char stuhl[2];
 	char schritteInput[10];
-	int schritteInDurchgang;
+
 	while (!stuhlErreicht) {
+		int schritteInDurchgang = 0;
 		bool trashInput = false;
 		do {
 			if (trashInput) {
