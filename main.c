@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "inputChecker.h"
+
 int main() {
 	int schritteGesamt = 0;
 	int umdrehungen = 0;
