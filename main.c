@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define AE (char)142
-
 int main() {
 	int schritteGesamt = 0;
 	int umdrehungen = 0;
@@ -17,7 +15,7 @@ int main() {
 		bool trashInput = false;
 		do {
 			if (trashInput) {
-				printf("UNZUL%cSSIGER INPUT!!!\n", AE);
+				printf("UNZULAESSIGER INPUT!!!\n");
 			}
 			printf("\nLiegt der Stuhl auf dem Weg?\n");
 			printf("y/n: ");
@@ -34,7 +32,7 @@ int main() {
 
 		do {
 			if (trashInput) {
-				printf("UNZUL%cSSIGER INPUT!!!\n", AE);
+				printf("UNZULAESSIGER INPUT!!!\n");
 				printf("Bitte gib eine positive Ganzzahl an!\n");
 			}
 
@@ -47,7 +45,8 @@ int main() {
 			printf("Eingabe: ");
 			scanf("%s", schritteInput);
 			trashInput = false;
-			for (int i = 0; i < sizeof(schritteInput); ++i) {
+			int i;
+			for (i = 0; i < sizeof(schritteInput); ++i) {
 				if (!isdigit(schritteInput[i])) {
 					if (!(schritteInput[i] == '\0' && i > 0)) {
 						trashInput = true;
