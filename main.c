@@ -5,60 +5,47 @@
 
 #include "inputChecker.h"
 
+int schritteGesamt;
+int umdrehungen;
+
 int main() {
-	int schritteGesamt = 0;
-	int umdrehungen = 0;
+	schritteGesamt = 0;
+	umdrehungen = 0;
 	bool stuhlErreicht = false;
-	char stuhl[2];
-	char schritteInput[10];
+	char userInput[10];
 
 	while (!stuhlErreicht) {
 		int schritteInDurchgang = 0;
-		bool trashInput = false;
+		int validInput = 1;
 		do {
-			if (trashInput) {
+			if (!validInput) {
 				printf("UNZULAESSIGER INPUT!!!\n");
 			}
 			printf("\nLiegt der Stuhl auf dem Weg?\n");
 			printf("y/n: ");
-			scanf("%s", stuhl);
+			scanf("%s", userInput);
 
-			stuhl[0] = tolower(stuhl[0]);
-			if (stuhl[0] == 'y' || stuhl[0] == 'n') {
-				trashInput = false;
-			}
-			else {
-				trashInput = true;
-			}
-		} while (trashInput);
+			firstLetterYOrN(userInput, &validInput);
+		} while (!validInput);
 
 		do {
-			if (trashInput) {
+			if (!validInput) {
 				printf("UNZULAESSIGER INPUT!!!\n");
 				printf("Bitte gib eine positive Ganzzahl an!\n");
 			}
 
-			if (stuhl[0] == 'y') {
+			if (userInput[0] == 'y') {
 				printf("\nWie viele Schritte bis zum Stuhl?\n");
 			}
 			else {
 				printf("\nWie viele Schritte bis zur Wand?\n");
 			}
 			printf("Eingabe: ");
-			scanf("%s", schritteInput);
-			trashInput = false;
-			int i;
-			for (i = 0; i < sizeof(schritteInput); ++i) {
-				if (!isdigit(schritteInput[i])) {
-					if (!(schritteInput[i] == '\0' && i > 0)) {
-						trashInput = true;
-					}
-					break;
-				}
-			}
-		} while (trashInput);
+			scanf("%s", userInput);
+			CheckStringToUInt(userInput, &validInput);
+		} while (!validInput);
 		//atoi = ASCII to integer
-		schritteInDurchgang = atoi(schritteInput);
+		schritteInDurchgang = atoi(userInput);
 
 		schritteGesamt += schritteInDurchgang;
 
@@ -68,7 +55,7 @@ int main() {
 			j++;
 		}
 
-		if (stuhl[0] == 'y') {
+		if (userInput[0] == 'y') {
 			stuhlErreicht = true;
 			printf("STUHL ERREICHT \\(^.^)/\n");
 		}

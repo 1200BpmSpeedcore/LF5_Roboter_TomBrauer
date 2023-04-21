@@ -15,7 +15,7 @@ void CheckStringToUInt(char toCheck[], int* canConvert) {
 	*canConvert = 1;
 }
 
-void FirstLetterYOrN(char toCheck[], int* isYesNo) {
+void firstLetterYOrN(char toCheck[], int* isYesNo) {
 	toCheck[0] = tolower(toCheck[0]);
 
 	if (toCheck[0] == 'y' || toCheck[0] == 'n') {
